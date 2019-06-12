@@ -5,13 +5,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
     {
         path: 'projects',
-        loadChildren: './projects/projects.module#ProjectsModule',
+        redirectTo: './projects'
+        // loadChildren: './projects/projects.module#ProjectsModule',
     },
     {
         path: 'about',
-        loadChildren: './about/about.module#AboutModule'
+        redirectTo: './about'
+        // loadChildren: './about/about.module#AboutModule'
     },
-    { path: '', redirectTo: '/introduction', pathMatch: 'full' },
+    { path: '', redirectTo: './', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
 
