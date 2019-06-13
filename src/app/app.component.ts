@@ -14,4 +14,13 @@ export class AppComponent {
             outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation
         );
     }
+
+    public openNav() {
+      document.getElementById("mySidebar").style.width = "60%";
+      document.getElementById("mySidebar").style.display = "block";
+    }
+
+    public closeNav() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
 }
