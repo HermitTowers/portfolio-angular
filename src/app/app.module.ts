@@ -7,21 +7,34 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { AboutComponent } from './about/about.component';
+import { NavSidebarModule } from './nav-sidebar/nav-sidebar.module';
+import { HomeComponent } from './home/home.component';
+import { GitPortfolioComponent } from './git-portfolio/git-portfolio.component';
+import { ContactMeComponent } from './contact-me/contact-me.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [
+  imports:
+  [
+    BrowserModule,
+    AppRoutingModule,
+    MatGridListModule,
+    NavSidebarModule
+  ],
+  declarations:
+  [
     AppComponent,
     PageNotFoundComponent,
     ProjectsComponent,
-    AboutComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatGridListModule
+    AboutComponent,
+    HomeComponent,
+    GitPortfolioComponent,
+    ContactMeComponent,
+    FooterComponent
   ],
   providers: [],
-  bootstrap: [
+  bootstrap:
+  [
     AppComponent
   ]
 })

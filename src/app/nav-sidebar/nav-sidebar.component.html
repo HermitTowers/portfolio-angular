@@ -1,0 +1,13 @@
+<mat-sidenav-container class="sideNav">
+    <mat-sidenav #sidenav mode="over" position="end" [fixedInViewport]="true" class="navLinks">
+        <mat-nav-list>
+            <a mat-list-item href="#" class="w3-bar-item w3-button w3-text-grey w3-hover-black" (click)="sidenav.toggle()">Home</a>
+            <a mat-list-item href="#portfolio" class="w3-bar-item w3-button w3-text-grey w3-hover-black" (click)="sidenav.toggle()">Portfolio</a>
+            <a mat-list-item href="#about" class="w3-bar-item w3-button w3-text-grey w3-hover-black" (click)="sidenav.toggle()">About</a>
+            <a mat-list-item href="#contact" class="w3-bar-item w3-button w3-text-grey w3-hover-black" (click)="sidenav.toggle()">Contact</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="w3-bar-block w3-right navMenuButton">
+        <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    </mat-sidenav-content>
+</mat-sidenav-container>
