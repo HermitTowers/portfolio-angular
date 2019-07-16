@@ -3,19 +3,21 @@
     <hr class="w3-opacity">
 
     <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-half">
-            <table>
-                <th class="portfolio">This Site</th>
-                <th class="portfolio">GURPS Spell Engine</th>
-                <th class="portfolio">My Google Bookshelf</th>
+        <div>
+            <table class="portfolio">
+                <th>This Site</th>
+                <th>GURPS Spell Engine</th>
+                <th>My Google Bookshelf</th>
                 <tr>
-                    <td>
-                        <img id="portfolio" src="../assets/images/JerryDunsmoreGallifreyan100x100_ThickLines.png">
+                    <td #git_portfolio (mouseenter)="onMouseEnter('git_portfolio')" (mouseleave)="onMouseLeave('git_portfolio')">
+                        <a href="https://github.com/jldunsmore/portfolio-angular" target="_blank" class="no-underline">
+                            <img id="portfolio" src="../assets/images/JerryDunsmoreGallifreyan100x100_ThickLines.png">
+                        </a>
                     </td>
-                    <td>
+                    <td #git_magic_engine (mouseenter)="onMouseEnter('git_magic_engine')" (mouseleave)="onMouseLeave('git_magic_engine')">
                         <img id="gurpsspellengine" src="../assets/images/sccpre.cat-magic-book-png-100.png">
                     </td>
-                    <td>
+                    <td #git_bookshelf (mouseenter)="onMouseEnter('git_bookshelf')" (mouseleave)="onMouseLeave('git_bookshelf')">
                         <img id="bookshelf" src="../assets/images/stack-of-books-clipart-a_stack_school_books_royalty_free_080825-028960-394042.jpg">
                     </td>
                 </tr>
