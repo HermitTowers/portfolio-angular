@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -13,6 +14,7 @@ import { GitPortfolioComponent } from './git-portfolio/git-portfolio.component';
 import { ContactMeComponent } from './contact-me/contact-me.component';
 import { FooterComponent } from './footer/footer.component';
 import { PortfolioOverlayComponent } from './portfolioOverlay/portfolioOverlay.component';
+import { MainContentService } from './services/mainContent.service';
 
 @NgModule({
   imports:
@@ -21,7 +23,8 @@ import { PortfolioOverlayComponent } from './portfolioOverlay/portfolioOverlay.c
     AppRoutingModule,
     MatGridListModule,
     NavSidebarModule,
-    OverlayModule
+    OverlayModule,
+    HttpClientModule
   ],
   declarations:
   [
@@ -34,7 +37,9 @@ import { PortfolioOverlayComponent } from './portfolioOverlay/portfolioOverlay.c
     ContactMeComponent,
     FooterComponent,
   ],
-  providers: [],
+  providers: [
+    MainContentService
+  ],
   bootstrap:
   [
     AppComponent
