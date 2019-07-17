@@ -12,6 +12,7 @@ export class MainContentService {
 
     public getMainContent(): Observable<string> {
         return of(this.getMainContentBlurb());
+        // change this to a list of strings for <p>string</p> on home page
     }
 
     public getProfilePictures(): Observable<ImageDetails[]> {
