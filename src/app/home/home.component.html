@@ -4,12 +4,14 @@
     <div class="w3-content w3-justify w3-text-grey w3-padding-32" id="about">
         <h2>Introduction</h2>
         <hr class="w3-opacity">
-        {{mainContent}}
+        <p *ngFor="let paragraph of mainContent">
+            {{paragraph}}
+        </p>
     </div>
     <div class="row">
         <ul>
             <li *ngFor="let img of profileImages">
-                <img src="../../assets/images/{{img.url}}" class="img" width="240">
+                <img src="../../assets/images/{{img.url}}" class="img" height="240">
             </li>
         </ul>
     </div>

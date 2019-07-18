@@ -1,14 +1,17 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
+import { Component, ViewChild, ElementRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
 import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
+
 import { PortfolioOverlayComponent } from '../portfolioOverlay/portfolioOverlay.component';
+import { GitReadMeService } from '../services/getReadMeService';
+import { GitReadMe } from '../models/gitReadMe';
 
 @Component({
   selector: 'app-git-portfolio',
   templateUrl: './git-portfolio.component.html',
   styleUrls: ['./git-portfolio.component.scss']
 })
-export class GitPortfolioComponent implements AfterViewInit {
-     @ViewChild('git_portfolio') gitPortfoloEleRef: ElementRef;
+export class GitPortfolioComponent {
+     @ViewChild('portfolio_angular') gitPortfoloEleRef: ElementRef;
      @ViewChild('git_magic_engine') gitMagicEngineEleRef: ElementRef;
      @ViewChild('git_bookshelf') gitBookshelfEleRef: ElementRef;
 
@@ -16,9 +19,12 @@ export class GitPortfolioComponent implements AfterViewInit {
     public gitMagicEnginePanelHost: DomPortalHost;
     public gitBookshelfPanelHost: DomPortalHost;
 
+    public readMe = GitReadMe.empty();
+
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector,
-                private appRef: ApplicationRef) { }
+                private appRef: ApplicationRef,
+                private gitReadMeService: GitReadMeService) { }
 
     ngAfterViewInit() {
         this.gitPortfolioPortalHost = this.getPortalHost(this.gitPortfoloEleRef);
@@ -28,8 +34,9 @@ export class GitPortfolioComponent implements AfterViewInit {
 
     public onMouseEnter(elementRef: string) {
         switch (elementRef) {
-            case 'git_portfolio':
-                this.toggleMouseEnter(this.gitPortfolioPortalHost, 'This website code');
+            case 'portfolio_angular':
+                this.getReadMeText('portfolio_angular');
+                this.toggleMouseEnter(this.gitPortfolioPortalHost, this.readMe.content);
                 break;
             case 'git_magic_engine':
                 this.toggleMouseEnter(this.gitMagicEnginePanelHost,
@@ -44,7 +51,7 @@ export class GitPortfolioComponent implements AfterViewInit {
 
     public onMouseLeave(elementRef: string) {
         switch (elementRef) {
-            case 'git_portfolio':
+            case 'portfolio_angular':
                 this.toggleMouseLeave(this.gitPortfolioPortalHost);
                 break;
             case 'git_magic_engine':
@@ -54,6 +61,12 @@ export class GitPortfolioComponent implements AfterViewInit {
                 this.toggleMouseLeave(this.gitBookshelfPanelHost);
                 break;
         }
+    }
+
+    private getReadMeText(repName: string) {
+        this.gitReadMeService.get(repName).subscribe(response => {
+            this.readMe = response;
+        });
     }
 
     private toggleMouseEnter(portalHost: DomPortalHost, content: string) {

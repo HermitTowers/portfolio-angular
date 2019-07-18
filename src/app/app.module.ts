@@ -15,6 +15,7 @@ import { ContactMeComponent } from './contact-me/contact-me.component';
 import { FooterComponent } from './footer/footer.component';
 import { PortfolioOverlayComponent } from './portfolioOverlay/portfolioOverlay.component';
 import { MainContentService } from './services/mainContent.service';
+import { GitReadMeService } from './services/getReadMeService';
 
 @NgModule({
   imports:
@@ -38,7 +39,8 @@ import { MainContentService } from './services/mainContent.service';
     FooterComponent,
   ],
   providers: [
-    MainContentService
+    MainContentService,
+    GitReadMeService
   ],
   bootstrap:
   [

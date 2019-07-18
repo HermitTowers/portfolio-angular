@@ -11,7 +11,7 @@ import { ImageDetails } from '../models/imageDetails';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-    public mainContent: string;
+    public mainContent: string[];
     public profileImages: ImageDetails[];
 
     constructor(private mainContentService: MainContentService) { }
