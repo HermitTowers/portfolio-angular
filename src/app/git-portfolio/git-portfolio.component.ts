@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
+import { AfterViewInit, OnInit } from '@angular/core';
 import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
+import { takeUntil, combineLatest } from 'rxjs/operators';
 
 import { PortfolioOverlayComponent } from '../portfolioOverlay/portfolioOverlay.component';
 import { GitReadMeService } from '../services/getReadMeService';
@@ -10,7 +12,7 @@ import { GitReadMe } from '../models/gitReadMe';
   templateUrl: './git-portfolio.component.html',
   styleUrls: ['./git-portfolio.component.scss']
 })
-export class GitPortfolioComponent {
+export class GitPortfolioComponent implements AfterViewInit, OnInit {
      @ViewChild('portfolio_angular') gitPortfoloEleRef: ElementRef;
      @ViewChild('git_magic_engine') gitMagicEngineEleRef: ElementRef;
      @ViewChild('git_bookshelf') gitBookshelfEleRef: ElementRef;
@@ -19,12 +21,32 @@ export class GitPortfolioComponent {
     public gitMagicEnginePanelHost: DomPortalHost;
     public gitBookshelfPanelHost: DomPortalHost;
 
-    public readMe = GitReadMe.empty();
+    public gitPortfolio_angularReadMe = GitReadMe.empty();
+    public portfolioReadMe = GitReadMe.empty();
+    public gitBookshelfReadMe = GitReadMe.empty();
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector,
                 private appRef: ApplicationRef,
                 private gitReadMeService: GitReadMeService) { }
+
+    ngOnInit() {
+        this.gitReadMeService.get('portfolio_angular').pipe(
+            takeUntil(ngOnDestroy()),
+            this.gitReadMeService.get('git_magic_engine').takeUntil(ngOnDestroy()),
+            combineLatest(this.gitReadMeService.get('git_bookshelf').takeUntil(ngOnDestroy()), (portfolioReadMe, magicReadMe, bookShelfReadMe) => {
+                return {
+                    portfolioReadMe: portfolioReadMe,
+                    magicReadMe: magicReadMe,
+                    bookShelfReadMe: bookShelfReadMe,
+                }
+            })
+            ).subscribe(readMeTexts => {
+                this.gitPortfolio_angularReadMe = readMeTexts.portfolioReadMe;
+                this.portfolioReadMe = readMeTexts.magicReadMe;
+                this.gitBookshelfReadMe = readMeTexts.bookShelfReadMe;
+            });
+    }
 
     ngAfterViewInit() {
         this.gitPortfolioPortalHost = this.getPortalHost(this.gitPortfoloEleRef);
@@ -61,12 +83,6 @@ export class GitPortfolioComponent {
                 this.toggleMouseLeave(this.gitBookshelfPanelHost);
                 break;
         }
-    }
-
-    private getReadMeText(repName: string) {
-        this.gitReadMeService.get(repName).subscribe(response => {
-            this.readMe = response;
-        });
     }
 
     private toggleMouseEnter(portalHost: DomPortalHost, content: string) {
