@@ -1,18 +1,20 @@
 import { Component, ViewChild, ElementRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
 import { AfterViewInit, OnInit } from '@angular/core';
 import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
+import { pipe } from 'rxjs';
 import { takeUntil, combineLatest } from 'rxjs/operators';
 
 import { PortfolioOverlayComponent } from '../portfolioOverlay/portfolioOverlay.component';
 import { GitReadMeService } from '../services/getReadMeService';
 import { GitReadMe } from '../models/gitReadMe';
+import { OnDestroyComponent } from '../shared/onDestroy.component';
 
 @Component({
   selector: 'app-git-portfolio',
   templateUrl: './git-portfolio.component.html',
   styleUrls: ['./git-portfolio.component.scss']
 })
-export class GitPortfolioComponent implements AfterViewInit, OnInit {
+export class GitPortfolioComponent extends OnDestroyComponent implements AfterViewInit, OnInit {
      @ViewChild('portfolio_angular') gitPortfoloEleRef: ElementRef;
      @ViewChild('git_magic_engine') gitMagicEngineEleRef: ElementRef;
      @ViewChild('git_bookshelf') gitBookshelfEleRef: ElementRef;
@@ -21,30 +23,21 @@ export class GitPortfolioComponent implements AfterViewInit, OnInit {
     public gitMagicEnginePanelHost: DomPortalHost;
     public gitBookshelfPanelHost: DomPortalHost;
 
-    public gitPortfolio_angularReadMe = GitReadMe.empty();
+    public gitAngularReadMe = GitReadMe.empty();
     public portfolioReadMe = GitReadMe.empty();
     public gitBookshelfReadMe = GitReadMe.empty();
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector,
                 private appRef: ApplicationRef,
-                private gitReadMeService: GitReadMeService) { }
+                private gitReadMeService: GitReadMeService) {
+        super();
+    }
 
     ngOnInit() {
-        this.gitReadMeService.get('portfolio_angular').pipe(
-            takeUntil(ngOnDestroy()),
-            this.gitReadMeService.get('git_magic_engine').takeUntil(ngOnDestroy()),
-            combineLatest(this.gitReadMeService.get('git_bookshelf').takeUntil(ngOnDestroy()), (portfolioReadMe, magicReadMe, bookShelfReadMe) => {
-                return {
-                    portfolioReadMe: portfolioReadMe,
-                    magicReadMe: magicReadMe,
-                    bookShelfReadMe: bookShelfReadMe,
-                }
-            })
-            ).subscribe(readMeTexts => {
-                this.gitPortfolio_angularReadMe = readMeTexts.portfolioReadMe;
-                this.portfolioReadMe = readMeTexts.magicReadMe;
-                this.gitBookshelfReadMe = readMeTexts.bookShelfReadMe;
+        this.gitReadMeService.get('portfolio_angular').pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(readMeTexts => {
+                this.gitAngularReadMe = readMeTexts;
             });
     }
 
@@ -57,8 +50,7 @@ export class GitPortfolioComponent implements AfterViewInit, OnInit {
     public onMouseEnter(elementRef: string) {
         switch (elementRef) {
             case 'portfolio_angular':
-                this.getReadMeText('portfolio_angular');
-                this.toggleMouseEnter(this.gitPortfolioPortalHost, this.readMe.content);
+                this.toggleMouseEnter(this.gitPortfolioPortalHost, this.gitAngularReadMe.content);
                 break;
             case 'git_magic_engine':
                 this.toggleMouseEnter(this.gitMagicEnginePanelHost,

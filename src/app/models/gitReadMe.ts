@@ -6,24 +6,26 @@ export class GitReadMe {
     public sha: string;
     public size: number;
     public url: string;
-    public html_url: string;
-    public git_url: string;
-    public download_url: string;
+    public htmlUrl: string;
+    public gitUrl: string;
+    public downloadUrl: string;
     public type: string;
     public content: string;
     public encoding: string;
     public links: Link[];
 
+    // tslint:disable-next-line: variable-name
     constructor(name: string, path: string, sha: string, size: number, url: string, html_url: string, git_url: string,
+                // tslint:disable-next-line: variable-name
                 download_url: string, type: string, content: string, encoding: string, links: Link[]) {
         this.name = name;
         this.path = path;
         this.sha = sha;
         this.size = size;
         this.url = url;
-        this.html_url = html_url;
-        this.git_url = git_url;
-        this.download_url = download_url;
+        this.htmlUrl = html_url;
+        this.gitUrl = git_url;
+        this.downloadUrl = download_url;
         this.type = type;
         this.content = content;
         this.encoding = encoding;
@@ -32,5 +34,9 @@ export class GitReadMe {
 
     public static empty(): GitReadMe {
         return new GitReadMe('', '', '', 0, '', '', '', '', '', '', '', []);
+    }
+
+    public get contentSections(): string[] {
+        return this.content.split('#');
     }
 }
