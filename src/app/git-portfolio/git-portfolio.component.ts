@@ -50,7 +50,7 @@ export class GitPortfolioComponent extends OnDestroyComponent implements AfterVi
     public onMouseEnter(elementRef: string) {
         switch (elementRef) {
             case 'portfolio_angular':
-                this.toggleMouseEnter(this.gitPortfolioPortalHost, this.gitAngularReadMe.content);
+                this.toggleMouseEnter(this.gitPortfolioPortalHost, this.gitAngularReadMe.contentIntroSection);
                 break;
             case 'git_magic_engine':
                 this.toggleMouseEnter(this.gitMagicEnginePanelHost,

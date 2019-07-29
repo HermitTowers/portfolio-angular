@@ -1,4 +1,5 @@
 import { Link } from './link';
+import { IGitReadMe } from './IGitReadMe';
 
 export class GitReadMe {
     public name: string;
@@ -14,29 +15,44 @@ export class GitReadMe {
     public encoding: string;
     public links: Link[];
 
-    // tslint:disable-next-line: variable-name
-    constructor(name: string, path: string, sha: string, size: number, url: string, html_url: string, git_url: string,
-                // tslint:disable-next-line: variable-name
-                download_url: string, type: string, content: string, encoding: string, links: Link[]) {
-        this.name = name;
-        this.path = path;
-        this.sha = sha;
-        this.size = size;
-        this.url = url;
-        this.htmlUrl = html_url;
-        this.gitUrl = git_url;
-        this.downloadUrl = download_url;
-        this.type = type;
-        this.content = content;
-        this.encoding = encoding;
-        this.links = links;
+    constructor(gitReadMe: IGitReadMe) {
+        this.name = gitReadMe.name;
+        this.path = gitReadMe.path;
+        this.sha = gitReadMe.sha;
+        this.size = gitReadMe.size;
+        this.url = gitReadMe.url;
+        this.htmlUrl = gitReadMe.html_url;
+        this.gitUrl = gitReadMe.git_url;
+        this.downloadUrl = gitReadMe.download_url;
+        this.type = gitReadMe.type;
+        this.content = gitReadMe.content;
+        this.encoding = gitReadMe.encoding;
+        this.links = gitReadMe.links;
     }
 
     public static empty(): GitReadMe {
-        return new GitReadMe('', '', '', 0, '', '', '', '', '', '', '', []);
+        return new GitReadMe({
+            name: '',
+            path: '',
+            sha: '',
+            size: 0,
+            url: '',
+            html_url: '',
+            git_url: '',
+            download_url: '',
+            type: '',
+            content: '',
+            encoding: '',
+            links: []}
+        );
     }
 
-    public get contentSections(): string[] {
-        return this.content.split('#');
+    public get contentDecoded(): string {
+        return atob(this.content);
+    }
+
+    public get contentIntroSection(): string {
+        const sections = this.contentDecoded.split('##');
+        return sections.find(section => section.startsWith(' Intro'));
     }
 }
