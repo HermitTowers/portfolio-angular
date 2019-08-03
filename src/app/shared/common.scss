@@ -1,0 +1,15 @@
+.border-shadow {
+    -moz-box-shadow: 3px 3px 5px #535353;
+    -webkit-box-shadow: 3px 3px 5px #535353;
+    box-shadow: 3px 3px 5px #535353;
+}
+
+.zoom {
+    transition: transform .2s;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(4);
+}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { withLatestFrom, first } from 'rxjs/operators';
 
 
-import { MainContentService } from '../services/mainContent.service';
+import { HomeService } from '../services/home.service';
 import { ImageDetails } from '../models/imageDetails';
 
 @Component({
@@ -14,11 +14,11 @@ export class HomeComponent implements OnInit {
     public mainContent: string[];
     public profileImages: ImageDetails[];
 
-    constructor(private mainContentService: MainContentService) { }
+    constructor(private mainService: HomeService) { }
 
     ngOnInit() {
-        this.mainContentService.getMainContent().pipe(
-            withLatestFrom(this.mainContentService.getProfilePictures()),
+        this.mainService.getContent().pipe(
+            withLatestFrom(this.mainService.getProfilePictures()),
             first()
             ).subscribe(([mainContent, profilePictures]) => {
                 this.mainContent = mainContent;

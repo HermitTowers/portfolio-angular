@@ -14,8 +14,9 @@ import { GitPortfolioComponent } from './git-portfolio/git-portfolio.component';
 import { ContactMeComponent } from './contact-me/contact-me.component';
 import { FooterComponent } from './footer/footer.component';
 import { PortfolioOverlayComponent } from './portfolioOverlay/portfolioOverlay.component';
-import { MainContentService } from './services/mainContent.service';
-import { GitReadMeService } from './services/getReadMeService';
+import { HomeService } from './services/home.service';
+import { GitReadMeService } from './services/gitReadMe.service';
+import { AboutService } from './services/about.service';
 
 @NgModule({
   imports:
@@ -39,7 +40,8 @@ import { GitReadMeService } from './services/getReadMeService';
     FooterComponent,
   ],
   providers: [
-    MainContentService,
+    HomeService,
+    AboutService,
     GitReadMeService
   ],
   bootstrap:

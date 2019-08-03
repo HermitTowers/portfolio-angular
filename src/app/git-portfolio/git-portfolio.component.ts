@@ -2,12 +2,13 @@ import { Component, ViewChild, ElementRef, ApplicationRef, Injector, ComponentFa
 import { AfterViewInit, OnInit } from '@angular/core';
 import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
 import { pipe } from 'rxjs';
-import { takeUntil, combineLatest } from 'rxjs/operators';
+import { takeUntil, combineLatest, withLatestFrom } from 'rxjs/operators';
 
 import { PortfolioOverlayComponent } from '../portfolioOverlay/portfolioOverlay.component';
-import { GitReadMeService } from '../services/getReadMeService';
+import { GitReadMeService } from '../services/gitReadMe.service';
 import { GitReadMe } from '../models/gitReadMe';
 import { OnDestroyComponent } from '../shared/onDestroy.component';
+import { getComponentViewByIndex } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-git-portfolio',
@@ -35,7 +36,7 @@ export class GitPortfolioComponent extends OnDestroyComponent implements AfterVi
     }
 
     ngOnInit() {
-        this.gitReadMeService.get('portfolio_angular').pipe(takeUntil(this.ngUnsubscribe))
+        this.gitReadMeService.get('portfolio_angular')
             .subscribe(readMeTexts => {
                 this.gitAngularReadMe = readMeTexts;
             });

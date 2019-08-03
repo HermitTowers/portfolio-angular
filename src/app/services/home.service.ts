@@ -7,10 +7,10 @@ import { ImageDetails } from '../models/imageDetails';
 @Injectable({
   providedIn: 'root'
 })
-export class MainContentService {
+export class HomeService {
     constructor(private http: HttpClient) {}
 
-    public getMainContent(): Observable<string[]> {
+    public getContent(): Observable<string[]> {
         return of(this.getMainContentBlurb());
     }
 
@@ -42,8 +42,8 @@ export class MainContentService {
 
     private getProfilePathList(): ImageDetails[] {
         return [
-            new ImageDetails(1, 'KeepCalmBeWeird', 'profilePictures/profilePic_1.jpg'),
-            new ImageDetails(2, 'Bruichladdich', 'profilePictures/profilePic_2.jpg'),
+            new ImageDetails(1, 'Social', 'profilePictures/me_out.jpg'),
+            new ImageDetails(3, 'Bruichladdich', 'profilePictures/me_motorbike.jpg'),
         ];
     }
 
