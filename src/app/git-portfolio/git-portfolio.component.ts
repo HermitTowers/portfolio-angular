@@ -1,14 +1,11 @@
 import { Component, ViewChild, ElementRef, ApplicationRef, Injector, ComponentFactoryResolver } from '@angular/core';
 import { AfterViewInit, OnInit } from '@angular/core';
 import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
-import { pipe } from 'rxjs';
-import { takeUntil, combineLatest, withLatestFrom } from 'rxjs/operators';
 
 import { PortfolioOverlayComponent } from '../portfolioOverlay/portfolioOverlay.component';
 import { GitReadMeService } from '../services/gitReadMe.service';
 import { GitReadMe } from '../models/gitReadMe';
 import { OnDestroyComponent } from '../shared/onDestroy.component';
-import { getComponentViewByIndex } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-git-portfolio',
@@ -16,9 +13,9 @@ import { getComponentViewByIndex } from '@angular/core/src/render3/util';
   styleUrls: ['./git-portfolio.component.scss']
 })
 export class GitPortfolioComponent extends OnDestroyComponent implements AfterViewInit, OnInit {
-     @ViewChild('portfolio_angular') gitPortfoloEleRef: ElementRef;
-     @ViewChild('git_magic_engine') gitMagicEngineEleRef: ElementRef;
-     @ViewChild('git_bookshelf') gitBookshelfEleRef: ElementRef;
+    @ViewChild('portfolio_angular', {static: false}) gitPortfoloEleRef: ElementRef;
+    @ViewChild('git_magic_engine', {static: false}) gitMagicEngineEleRef: ElementRef;
+    @ViewChild('git_bookshelf', {static: false}) gitBookshelfEleRef: ElementRef;
 
     public gitPortfolioPortalHost: DomPortalHost;
     public gitMagicEnginePanelHost: DomPortalHost;
