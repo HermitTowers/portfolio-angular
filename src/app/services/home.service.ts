@@ -20,23 +20,27 @@ export class HomeService {
 
     private getMainContentBlurb(): string[] {
         return [
-            `I have been a Web Developer and Programmer since 1997 and have worked as both full time and as a contractor.
-            Those very different environments have given me many different skills and
-            experiences. With contracting, I learned how to adapt. Every company has their own way of doing things and in a
-            short time I need to fit in and be able to code. With a full time position, it
-            tends to be the number of ‘hats’ that I am required to wear that becomes the challenge on top of how I fit in
-            the team and the work that is required.`,
-            `Even with all that experience, I am not a ‘guru’. Programming, working with code, and building something
-            exciting and robust can be the most fun thing and I can 'lose' hours trying to figure
-            out one more coding problem. I may not know all the tricks or even all the buzzwords in the industry, but I am
-            proud of my ability to adapt and use my past experience and varied skills to
-            tackle any challenge, but I am not an expert in any one skill. I know a lot of things from different points of
-            view. I am trying to learn new things and remember what I have forgotten.`,
-            `I can work alone, but I enjoy more working with a team. We can all work together and bring our individual
-            skills, knowledge, and experiences together to accomplish any goal. I am most happy
-            fitting in where I can do the most good. I do not need the 'lime light', nor do I need to work on 'bleeding
-            edge' technologies. Don't get me wrong I LOVE new technology, but I am not in a such
-            a hurry to grab on and use it that I forgot to look where I am going on a current project.`
+            `I have been a Web Developer and Programmer since 1997 and have worked both full time and as a contractor. Each perspective has
+             shown me a different experience between development environments.  As a contractor, I find I struggle to adapt to the
+             environment and the code base to get the work done swiftly and without trying to rewrite large portions.  With a full time
+             position, I find the challenges are to learn where I fit on the team, to learn about the code base and coding standards, and
+             how I can contribute to team growth. Every company has their own way of doing things. I find it sad to say that sometimes
+             it’s the egos of fellow developers and members of management that prove the most difficult to work with.`,
+            `Even with the experience I have, I do not like calling myself an expert. Programming can be challenging and fun and I have
+             become so focused as to lose track of time trying to figure out some coding problems. I have the formal education that forms
+             the foundation of my skills, but I have learned more while working than anywhere. Unfortunately, working as a contractor has
+             led me down a wandering path. My skills tend to be eclectic through experience rather than reading publications. As an
+             example, I learned that I had misunderstood when asked about my understanding of solid programming. I had not known that
+             SOLID is a set of object-oriented programming principles. Granted, after looking them up, they seemed pretty standard to
+             what I knew from experience, but I had not known them as a formal set. Since then I have been better in looking up terms,
+             even if I assume I understand their meaning. I have also started to focus more on standard current skills sets like
+             Angular and C#.`,
+            `My preferred working environment is within a team of like minded nerds and geeks that can collaborate on projects. Although,
+             there are times I like to work alone without any distractions, or at least an environment I can control. Having the option to
+             work remotely is nice, but working in an office with my peers can be better for collaboration. It feels strange to mention,
+             but feeling comfortable to talk with my colleagues either in person or by some other means does not seem to always be
+             common. Egos, idiosyncrasies, personal bias, and many other things can make interaction challenging, but a good team will
+             work it out. `
         ];
     }
 
